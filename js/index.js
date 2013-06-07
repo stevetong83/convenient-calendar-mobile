@@ -30,17 +30,3 @@ var app = {
         console.log('Received Event: ' + id);
     }
 };
-
-$(document).ready(function(){
-  $('login').submit(function() {  
-      var valuesToSubmit = $(this).serialize();
-      $.ajax({
-          url: "http://wwww.convenientcalendar.com"
-          data: valuesToSubmit,
-          dataType: "JSON"
-      }).success(function(json){
-          //act on result.
-      });
-      return false;
-  });
-});
