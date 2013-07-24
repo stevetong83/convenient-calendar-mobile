@@ -13,9 +13,9 @@ $ ->
         @render()
 
       events: ->
-        "click #events" : "loadEvents"
+        "click #events"   : "loadEvents"
         "click #contacts" : "loadContacts"
-        "click #photos" : "loadPhotos"
+        "click #photos"   : "loadPhotos"
 
       render: =>
         $(@el).html(@template)

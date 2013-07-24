@@ -22,3 +22,4 @@ $ ->
     render: =>
       $(@el).html(@template)
       $('#menu').html('Photos')
+      $('#back').html('Menu')

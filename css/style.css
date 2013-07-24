@@ -12,12 +12,19 @@ body {
 }
 
 input {
-  width: 98%;
+  display: block;
+  width: 100%;
   padding: 15px;
   font-size: 1.3em;
   border-radius: 6px;
-  margin-bottom: 20px;
-  border: 1px solid #ccc
+  margin-bottom: 20px;  
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+input {
+  
 }
 
 ul {
@@ -31,20 +38,21 @@ ul {
 }
 
 #header {
-  background: url('../images/menu_bg.jpg') repeat-x;
+  background: url('../images/bg_sub_banner.jpg') repeat-x;
   color: #fff;
   font-weight: bold;
-  height: 40px;
+  height: 70px;
   width: 100%;
 }
 
 #header #menu {
-  line-height: 40px;
+  line-height: 70px;
   float: left;
+  font-size: 1.3em;
 }
 
 #header #back {
-  line-height: 40px;
+  line-height: 70px;
   float: right;
   cursor: pointer;
 }

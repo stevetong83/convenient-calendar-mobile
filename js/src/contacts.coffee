@@ -20,3 +20,4 @@ $ ->
     render: =>
       $(@el).html(@template)
       $('#menu').html('Contacts')
+      $('#back').html('Menu')

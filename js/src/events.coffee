@@ -5,8 +5,9 @@ $ ->
 
   class window.Events extends Backbone.Collection
 
+
   class window.EventsView extends Backbone.View
-    el: $('#container')
+    el: $('#page')
 
     initialize: ->
       @template =  """
@@ -15,12 +16,13 @@ $ ->
       @render()
 
     events: ->
-      "click #back" : "loadMenu"
+      'click #back' : 'goToMenu'
 
     render: =>
-      $(@el).html(@template)
+      $('#container').html(@template)
       $('#menu').html('Calendar')
-
-    loadMenu: () ->
-      console.log 'clicked'
+      $('#back').html('Menu')
+      
+    goToMenu: () ->
       App.navigate('/menu', trigger: true)
+      $('#back').empty()

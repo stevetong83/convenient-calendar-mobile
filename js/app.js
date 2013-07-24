@@ -46,7 +46,8 @@
 
       ContactsView.prototype.render = function() {
         $(this.el).html(this.template);
-        return $('#menu').html('Contacts');
+        $('#menu').html('Contacts');
+        return $('#back').html('Menu');
       };
 
       return ContactsView;
@@ -87,7 +88,7 @@
         return _ref2;
       }
 
-      EventsView.prototype.el = $('#container');
+      EventsView.prototype.el = $('#page');
 
       EventsView.prototype.initialize = function() {
         this.template = "<div id=\"calendar\"></div>";
@@ -96,20 +97,21 @@
 
       EventsView.prototype.events = function() {
         return {
-          "click #back": "loadMenu"
+          'click #back': 'goToMenu'
         };
       };
 
       EventsView.prototype.render = function() {
-        $(this.el).html(this.template);
-        return $('#menu').html('Calendar');
+        $('#container').html(this.template);
+        $('#menu').html('Calendar');
+        return $('#back').html('Menu');
       };
 
-      EventsView.prototype.loadMenu = function() {
-        console.log('clicked');
-        return App.navigate('/menu', {
+      EventsView.prototype.goToMenu = function() {
+        App.navigate('/menu', {
           trigger: true
         });
+        return $('#back').empty();
       };
 
       return EventsView;
@@ -213,7 +215,8 @@
 
       PhotosView.prototype.render = function() {
         $(this.el).html(this.template);
-        return $('#menu').html('Photos');
+        $('#menu').html('Photos');
+        return $('#back').html('Menu');
       };
 
       return PhotosView;
