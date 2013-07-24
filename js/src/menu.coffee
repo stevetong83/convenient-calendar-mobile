@@ -4,9 +4,11 @@ $ ->
 
       initialize: ->
         @template = """
-          <div id="events">Calendar</div>
-          <div id="contacts">Contacts</div>
-          <div id="photos">Photos</div>
+          <ul id="nav">
+            <li id="events">Calendar</li>
+            <li id="contacts"><div >Contacts</div></li>
+            <li id="photos">Photos</li>
+          </ul>
           """
         @render()
 
@@ -17,6 +19,7 @@ $ ->
 
       render: =>
         $(@el).html(@template)
+        $('#menu').html('Menu')
 
       loadEvents: () ->
         App.navigate('/events', trigger: true)
