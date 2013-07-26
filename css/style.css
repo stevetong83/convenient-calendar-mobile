@@ -4,7 +4,7 @@
   -webkit-tap-highlight-color: rgba(0,0,0,0); 
 }
 
-body {
+html, body {
   background-color: #eeeae7;
   font-family: "helvetica", "arial", sans-serif;
   padding: 0;
@@ -30,6 +30,10 @@ input {
 ul {
   padding: 0;
   margin: 0;
+}
+
+#page {
+  position: relative;
 }
 
 .wrapper {
@@ -66,4 +70,14 @@ ul {
   width: 100%;
   list-style-type: none;
   margin: 10px 0;
+}
+
+#footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  height: 70px;
+  width: 100%;
+  background: url('../images/bg_sub_banner.jpg') repeat-x;
+  z-index: 100;
 }

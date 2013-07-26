@@ -91,7 +91,7 @@
       EventsView.prototype.el = $('#page');
 
       EventsView.prototype.initialize = function() {
-        this.template = "<div id=\"calendar\"></div>";
+        this.template = "<div id=\"calendar\"></div>\n<div id=\"footer\">\n<div class=\"fc-button fc-state-default fc-corner-left\" id=\"month\">Month</div>\n<div id=\"week\">Week</div>\n<button id=\"day\">Day</button>\n</div>";
         return this.render();
       };
 
@@ -103,15 +103,35 @@
 
       EventsView.prototype.render = function() {
         $('#container').html(this.template);
-        $('#menu').html('Calendar');
-        return $('#back').html('Menu');
+        $('#back').html('Menu');
+        $('#calendar').fullCalendar({
+          viewDisplay: function(view) {
+            return jQuery('#menu').html(view.title);
+          },
+          header: {
+            left: 'prev',
+            right: 'next'
+          },
+          aspectRatio: 1,
+          defaultView: 'month',
+          slotMinutes: 30,
+          eventSource: ""
+        });
+        $('#month').click(function() {
+          return $('#calendar').fullCalendar('changeView', 'month');
+        });
+        $('#week').click(function() {
+          return $('#calendar').fullCalendar('changeView', 'basicWeek');
+        });
+        return $('#day').click(function() {
+          return $('#calendar').fullCalendar('changeView', 'basicDay');
+        });
       };
 
       EventsView.prototype.goToMenu = function() {
-        App.navigate('/menu', {
+        return App.navigate('/menu', {
           trigger: true
         });
-        return $('#back').empty();
       };
 
       return EventsView;
