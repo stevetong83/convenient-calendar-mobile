@@ -13,43 +13,70 @@ $ ->
 
     initialize: ->
       @template =  """
+        <div id="cal-header">
+          <div id="today">
+            <span class="today fc-button fc-state-default fc-corner-left fc-corner-right">Today</span>
+          </div>
+          <div id="new-event">
+            <span class="new-event fc-button fc-state-default fc-corner-left fc-corner-right">+</span>
+          </div>
+        </div>
         <div id="calendar"></div>
-        <div id="footer">
-        <div class="fc-button fc-state-default fc-corner-left" id="month">Month</div>
-        <div id="week">Week</div>
-        <button id="day">Day</button>
+        <div id="cal-footer">
+          <div id="previous"><span class="previous fc-button fc-state-default fc-corner-left fc-corner-right"><</span></div>
+          <div id="center">
+            <div class="month fc-button fc-state-default fc-corner-left">Month</div>
+            <div class="week fc-button fc-state-default">Week</div>
+            <div class="day fc-button fc-state-default fc-corner-right">Day</div>
+          </div>
+          <div id="next"><span <span class="next fc-button fc-state-default fc-corner-left fc-corner-right">></span></div>
         </div>
         """
       @render()
 
     events: ->
-      'click #back' : 'goToMenu'
+      'tap .month'      :   'changeToMonthView'
+      'tap .week'       :   'changeToWeekView'
+      'tap .day'        :   'changeToDayView'
+      'tap .today'      :   'today'
+      'tap .previous'   :   'previous'
+      'tap .next'       :   'next'
 
     render: =>
       $('#container').html(@template)
-      
       $('#back').html('Menu')
       $('#calendar').fullCalendar({
         viewDisplay: (view) ->
-          jQuery('#menu').html(view.title)
-        header: {
-          left: 'prev',
-          right: 'next'
-        },
+          $('#menu').html(view.title)
+        header: false,
 
         aspectRatio: 1,
         defaultView: 'month',
         slotMinutes: 30,
         eventSource: ""
-        })
-      
-      $('#month').click ->
-        $('#calendar').fullCalendar( 'changeView', 'month' )
-      $('#week').click ->
-        $('#calendar').fullCalendar( 'changeView', 'basicWeek' )
-      $('#day').click ->
-        $('#calendar').fullCalendar( 'changeView', 'basicDay' )
+      })
+      $(window).on "swipeleft", (event) ->
+        $('#calendar').fullCalendar('next')
+      $(window).on "swiperight", (event) ->
+        $('#calendar').fullCalendar('prev')
+
+    changeToMonthView: () ->
+      $('#calendar').fullCalendar( 'changeView', 'month' )
+
+    changeToDayView: () ->
+      $('#calendar').fullCalendar( 'changeView', 'basicDay' )
+
+    changeToWeekView: () ->
+      $('#calendar').fullCalendar( 'changeView', 'basicWeek' )
+
+    today: () ->
+      $('#calendar').fullCalendar('today')
+
+    previous: () ->
+      $('#calendar').fullCalendar('prev')
+
+    next: () ->
+      $('#calendar').fullCalendar('next')
+
       
 
-    goToMenu: () ->
-      App.navigate('/menu', trigger: true)

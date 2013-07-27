@@ -91,13 +91,18 @@
       EventsView.prototype.el = $('#page');
 
       EventsView.prototype.initialize = function() {
-        this.template = "<div id=\"calendar\"></div>\n<div id=\"footer\">\n<div class=\"fc-button fc-state-default fc-corner-left\" id=\"month\">Month</div>\n<div id=\"week\">Week</div>\n<button id=\"day\">Day</button>\n</div>";
+        this.template = "<div id=\"cal-header\">\n  <div id=\"today\">\n    <span class=\"today fc-button fc-state-default fc-corner-left fc-corner-right\">Today</span>\n  </div>\n  <div id=\"new-event\">\n    <span class=\"new-event fc-button fc-state-default fc-corner-left fc-corner-right\">+</span>\n  </div>\n</div>\n<div id=\"calendar\"></div>\n<div id=\"cal-footer\">\n  <div id=\"previous\"><span class=\"previous fc-button fc-state-default fc-corner-left fc-corner-right\"><</span></div>\n  <div id=\"center\">\n    <div class=\"month fc-button fc-state-default fc-corner-left\">Month</div>\n    <div class=\"week fc-button fc-state-default\">Week</div>\n    <div class=\"day fc-button fc-state-default fc-corner-right\">Day</div>\n  </div>\n  <div id=\"next\"><span <span class=\"next fc-button fc-state-default fc-corner-left fc-corner-right\">></span></div>\n</div>";
         return this.render();
       };
 
       EventsView.prototype.events = function() {
         return {
-          'click #back': 'goToMenu'
+          'tap .month': 'changeToMonthView',
+          'tap .week': 'changeToWeekView',
+          'tap .day': 'changeToDayView',
+          'tap .today': 'today',
+          'tap .previous': 'previous',
+          'tap .next': 'next'
         };
       };
 
@@ -106,32 +111,44 @@
         $('#back').html('Menu');
         $('#calendar').fullCalendar({
           viewDisplay: function(view) {
-            return jQuery('#menu').html(view.title);
+            return $('#menu').html(view.title);
           },
-          header: {
-            left: 'prev',
-            right: 'next'
-          },
+          header: false,
           aspectRatio: 1,
           defaultView: 'month',
           slotMinutes: 30,
           eventSource: ""
         });
-        $('#month').click(function() {
-          return $('#calendar').fullCalendar('changeView', 'month');
+        $(window).on("swipeleft", function(event) {
+          return $('#calendar').fullCalendar('next');
         });
-        $('#week').click(function() {
-          return $('#calendar').fullCalendar('changeView', 'basicWeek');
-        });
-        return $('#day').click(function() {
-          return $('#calendar').fullCalendar('changeView', 'basicDay');
+        return $(window).on("swiperight", function(event) {
+          return $('#calendar').fullCalendar('prev');
         });
       };
 
-      EventsView.prototype.goToMenu = function() {
-        return App.navigate('/menu', {
-          trigger: true
-        });
+      EventsView.prototype.changeToMonthView = function() {
+        return $('#calendar').fullCalendar('changeView', 'month');
+      };
+
+      EventsView.prototype.changeToDayView = function() {
+        return $('#calendar').fullCalendar('changeView', 'basicDay');
+      };
+
+      EventsView.prototype.changeToWeekView = function() {
+        return $('#calendar').fullCalendar('changeView', 'basicWeek');
+      };
+
+      EventsView.prototype.today = function() {
+        return $('#calendar').fullCalendar('today');
+      };
+
+      EventsView.prototype.previous = function() {
+        return $('#calendar').fullCalendar('prev');
+      };
+
+      EventsView.prototype.next = function() {
+        return $('#calendar').fullCalendar('next');
       };
 
       return EventsView;
@@ -150,7 +167,7 @@
         return _ref;
       }
 
-      MenuView.prototype.el = '#container';
+      MenuView.prototype.el = '#page';
 
       MenuView.prototype.initialize = function() {
         this.template = "<ul id=\"nav\">\n  <li id=\"events\">Calendar</li>\n  <li id=\"contacts\"><div >Contacts</div></li>\n  <li id=\"photos\">Photos</li>\n</ul>";
@@ -161,13 +178,15 @@
         return {
           "click #events": "loadEvents",
           "click #contacts": "loadContacts",
-          "click #photos": "loadPhotos"
+          "click #photos": "loadPhotos",
+          'click #back': 'goToMenu'
         };
       };
 
       MenuView.prototype.render = function() {
-        $(this.el).html(this.template);
-        return $('#menu').html('Menu');
+        $('#container').html(this.template);
+        $('#menu').html('');
+        return $.mobile.loadingMessage = false;
       };
 
       MenuView.prototype.loadEvents = function() {
@@ -184,6 +203,12 @@
 
       MenuView.prototype.loadPhotos = function() {
         return App.navigate('/photos', {
+          trigger: true
+        });
+      };
+
+      MenuView.prototype.goToMenu = function() {
+        return App.navigate('/menu', {
           trigger: true
         });
       };

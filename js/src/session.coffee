@@ -20,6 +20,7 @@ $ ->
 
     render: =>
       $(@el).html(@template)
+      
 
     loadMenu: () ->
       App.navigate('/menu', trigger: true)

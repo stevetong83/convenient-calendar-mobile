@@ -1,6 +1,6 @@
 $ ->
     class window.MenuView extends Backbone.View
-      el: ('#container')
+      el: ('#page')
 
       initialize: ->
         @template = """
@@ -16,10 +16,12 @@ $ ->
         "click #events"   : "loadEvents"
         "click #contacts" : "loadContacts"
         "click #photos"   : "loadPhotos"
+        'click #back' : 'goToMenu'
 
       render: =>
-        $(@el).html(@template)
-        $('#menu').html('Menu')
+        $('#container').html(@template)
+        $('#menu').html('')
+        $.mobile.loadingMessage = false
 
       loadEvents: () ->
         App.navigate('/events', trigger: true)
@@ -29,3 +31,6 @@ $ ->
 
       loadPhotos: () ->
         App.navigate('/photos', trigger: true)
+
+      goToMenu: () ->
+        App.navigate('/menu', trigger: true)
