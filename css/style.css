@@ -14,17 +14,13 @@ html, body {
 input {
   display: block;
   width: 100%;
-  padding: 15px;
-  font-size: 1.3em;
+  padding: 5%;
+  font-size: 1.8em;
   border-radius: 6px;
   margin-bottom: 20px;  
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
-}
-
-input {
-  
 }
 
 ul {
@@ -42,21 +38,22 @@ ul {
 }
 
 #header {
-  background: url('../images/bg_sub_banner.jpg') repeat-x;
+  background: blue;
   color: #fff;
   font-weight: bold;
-  height: 70px;
+  height: 130px;
   width: 100%;
 }
 
 #header #menu {
-  line-height: 70px;
+  line-height: 130px;
   float: left;
-  font-size: 1.3em;
+  font-size: 2.0em;
 }
 
 #header #back {
-  line-height: 70px;
+  line-height: 130px;
+  font-size: 1.8em;
   float: right;
   cursor: pointer;
 }
@@ -66,7 +63,7 @@ ul {
   font-weight: bold;
   background: #1f448a;
   cursor: pointer;
-  line-height: 90px;
+  line-height: 200px;
   width: 100%;
   list-style-type: none;
   margin: 10px 0;
@@ -76,8 +73,8 @@ ul {
   position: fixed;
   bottom: 0;
   left: 0;
-  height: 70px;
+  height: 130px;
   width: 100%;
-  background: url('../images/bg_sub_banner.jpg') repeat-x;
+  background: blue;
   z-index: 100;
 }
