@@ -2,6 +2,8 @@
   -webkit-touch-callout: none;   
   -webkit-text-size-adjust: none;         
   -webkit-tap-highlight-color: rgba(0,0,0,0); 
+  -webkit-user-select:none;
+  user-select:none
 }
 
 html, body {
@@ -51,9 +53,10 @@ ul {
   font-size: 2.5em;
 }
 
+
+
 #header #back {
   line-height: 130px;
-  font-size: 1.8em;
   float: right;
   cursor: pointer;
 }
@@ -73,7 +76,7 @@ ul {
   position: fixed;
   bottom: 0;
   left: 0;
-  height: 130px;
+  padding: 3% 0;
   width: 100%;
   background: #1f448a;
   z-index: 100;
@@ -81,82 +84,101 @@ ul {
 
 #cal-header {
   width: 100%;
-  height: 80px;
+  height: 55px;
 }
 
 #cal-header #today {
   float: left;
   padding: 3% 0;
-  line-height: 80px;
-}
-
-#cal-header .today {
-  padding: 10px 20px;
-  font-weight: bold;
-  font-size: 2em;
-}
-
-#cal-header #new-event {
-  float: right;
-  padding: 3% 0;
-  line-height: 80px;
-}
-
-#cal-header .new-event {
-  padding: 10px 20px;
-  font-weight: bold;
-  font-size: 2em;
+  line-height: 55px;
 }
 
 #cal-footer #previous {
   float: left;
-  line-height: 130px;
-  margin-left: 5%;
+  line-height: 55px;
   width: 15%;
+  margin-left: 5%;
 }
 
-#cal-footer .previous {
-  padding: 10px 20px;
-  font-weight: bold;
-  font-size: 2em;
-  border: 2px solid #000;
+#cal-footer #next {
+  float: right;
+  line-height: 55px;
+  margin-right: 5%;
 }
+
+
+#cal-header #new-event {
+  float: right;
+  padding: 3% 0;
+  line-height: 55px;
+}
+
 
 #cal-footer #center {
   float: left;
   text-align: center;
   width: 60%;
   margin: 0 auto;
-  line-height: 130px;
+  line-height: 55px;
+
 }
 
 #cal-footer .month {
-  padding: 10px 20px;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
   font-weight: bold;
-  font-size: 2em;
 }
 
 #cal-footer .week {
-  padding: 10px 20px;
+  margin: 0 -7px;
   font-weight: bold;
-  font-size: 2em;
+  border-radius: 0;
 }
 
 #cal-footer .day {
-  padding: 10px 20px;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
   font-weight: bold;
-  font-size: 2em;
 }
 
-#cal-footer #next {
-  float: right;
-  line-height: 130px;
-  margin-right: 5%;
+.cal-button {
+  -moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
+  -webkit-box-shadow:inset 0px 1px 0px 0px #ffffff;
+  box-shadow:inset 0px 1px 0px 0px #ffffff;
+  background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #ededed), color-stop(1, #dfdfdf) );
+  background:-moz-linear-gradient( center top, #ededed 5%, #dfdfdf 100% );
+  filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ededed', endColorstr='#dfdfdf');
+  background-color:#ededed;
+  border-radius:10px;
+  border:1px solid #ccc;
+  display:inline-block;
+  color:#777777;
+  font-family:arial;
+  font-size:20px;
+  font-weight:bold;
+  padding:20px;
+  text-decoration:none;
+  text-shadow:1px 1px 0px #ffffff;
+}
+.active {
+  background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #444), color-stop(1, #ededed) );
+  background:-moz-linear-gradient( center top, #444 5%, #ededed 100% );
+  filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#444', endColorstr='#ededed');
+  background-color:#444;
+  color: #fff !important;
 }
 
-#cal-footer .next {
-  padding: 10px 20px;
-  font-weight: bold;
-  font-size: 2em;
-  border: 2px solid #000;
+.icon {
+  padding: 20px;
+  border: 1px solid #000;
+  background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#2F2727), to(#1f448a));
+  border-radius: 10px;
+  font-size: 1.8em;
+  color: #fff;
 }
+
+#back .active {
+  background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#1f448a), to(#2F2727));
+}
+
+

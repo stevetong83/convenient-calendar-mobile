@@ -91,7 +91,7 @@
       EventsView.prototype.el = $('#page');
 
       EventsView.prototype.initialize = function() {
-        this.template = "<div id=\"cal-header\">\n  <div id=\"today\">\n    <span class=\"today fc-button fc-state-default fc-corner-left fc-corner-right\">Today</span>\n  </div>\n  <div id=\"new-event\">\n    <span class=\"new-event fc-button fc-state-default fc-corner-left fc-corner-right\">+</span>\n  </div>\n</div>\n<div id=\"calendar\"></div>\n<div id=\"cal-footer\">\n  <div id=\"previous\"><span class=\"previous fc-button fc-state-default fc-corner-left fc-corner-right\"><</span></div>\n  <div id=\"center\">\n    <div class=\"month fc-button fc-state-default fc-corner-left\">Month</div>\n    <div class=\"week fc-button fc-state-default\">Week</div>\n    <div class=\"day fc-button fc-state-default fc-corner-right\">Day</div>\n  </div>\n  <div id=\"next\"><span <span class=\"next fc-button fc-state-default fc-corner-left fc-corner-right\">></span></div>\n</div>";
+        this.template = "<div id=\"cal-header\">\n  <div id=\"today\">\n    <button class=\"cal-button today\">Today</button>\n  </div>\n  <div id=\"new-event\">\n    <button class=\"new-event cal-button\">+</button>\n  </div>\n</div>\n<div id=\"calendar\"></div>\n<div id=\"cal-footer\">\n  <div id=\"previous\">\n    <button class=\"previous cal-button\"><</button>\n  </div>\n  <div id=\"center\">\n    <button class=\"month cal-button\">Month</button>\n    <button class=\"week cal-button\">Week</button>\n    <button class=\"day cal-button\">Day</button>\n  </div>\n  <div id=\"next\">\n    <button class=\"next cal-button\">></button>\n  </div>\n</div>";
         return this.render();
       };
 
@@ -108,7 +108,7 @@
 
       EventsView.prototype.render = function() {
         $('#container').html(this.template);
-        $('#back').html('Menu');
+        $('#back').html("<button class='icon'>Menu</button");
         $('#calendar').fullCalendar({
           viewDisplay: function(view) {
             return $('#menu').html(view.title);
@@ -122,8 +122,56 @@
         $(window).on("swipeleft", function(event) {
           return $('#calendar').fullCalendar('next');
         });
-        return $(window).on("swiperight", function(event) {
+        $(window).on("swiperight", function(event) {
           return $('#calendar').fullCalendar('prev');
+        });
+        $(".today").bind("touchstart", function() {
+          return $('.today').addClass('active');
+        });
+        $(".today").bind("touchend", function() {
+          return $('.today').removeClass('active');
+        });
+        $(".new-event").bind("touchstart", function() {
+          return $('.new-event').addClass('active');
+        });
+        $(".new-event").bind("touchend", function() {
+          return $('.new-event').removeClass('active');
+        });
+        $(".next").bind("touchstart", function() {
+          return $('.next').addClass('active');
+        });
+        $(".next").bind("touchend", function() {
+          return $('.next').removeClass('active');
+        });
+        $(".previous").bind("touchstart", function() {
+          return $('.previous').addClass('active');
+        });
+        $(".previous").bind("touchend", function() {
+          return $('.previous').removeClass('active');
+        });
+        $(".month").bind("touchstart", function() {
+          return $('.month').addClass('active');
+        });
+        $(".month").bind("touchend", function() {
+          return $('.month').removeClass('active');
+        });
+        $(".week").bind("touchstart", function() {
+          return $('.week').addClass('active');
+        });
+        $(".week").bind("touchend", function() {
+          return $('.week').removeClass('active');
+        });
+        $(".day").bind("touchstart", function() {
+          return $('.day').addClass('active');
+        });
+        $(".day").bind("touchend", function() {
+          return $('.day').removeClass('active');
+        });
+        $(".icon").bind("touchstart", function() {
+          return $('.icon').addClass('active');
+        });
+        return $(".icon").bind("touchend", function() {
+          return $('.icon').removeClass('active');
         });
       };
 

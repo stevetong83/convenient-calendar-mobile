@@ -15,21 +15,25 @@ $ ->
       @template =  """
         <div id="cal-header">
           <div id="today">
-            <span class="today fc-button fc-state-default fc-corner-left fc-corner-right">Today</span>
+            <button class="cal-button today">Today</button>
           </div>
           <div id="new-event">
-            <span class="new-event fc-button fc-state-default fc-corner-left fc-corner-right">+</span>
+            <button class="new-event cal-button">+</button>
           </div>
         </div>
         <div id="calendar"></div>
         <div id="cal-footer">
-          <div id="previous"><span class="previous fc-button fc-state-default fc-corner-left fc-corner-right"><</span></div>
-          <div id="center">
-            <div class="month fc-button fc-state-default fc-corner-left">Month</div>
-            <div class="week fc-button fc-state-default">Week</div>
-            <div class="day fc-button fc-state-default fc-corner-right">Day</div>
+          <div id="previous">
+            <button class="previous cal-button"><</button>
           </div>
-          <div id="next"><span <span class="next fc-button fc-state-default fc-corner-left fc-corner-right">></span></div>
+          <div id="center">
+            <button class="month cal-button">Month</button>
+            <button class="week cal-button">Week</button>
+            <button class="day cal-button">Day</button>
+          </div>
+          <div id="next">
+            <button class="next cal-button">></button>
+          </div>
         </div>
         """
       @render()
@@ -44,7 +48,7 @@ $ ->
 
     render: =>
       $('#container').html(@template)
-      $('#back').html('Menu')
+      $('#back').html("<button class='icon'>Menu</button")
       $('#calendar').fullCalendar({
         viewDisplay: (view) ->
           $('#menu').html(view.title)
@@ -55,10 +59,51 @@ $ ->
         slotMinutes: 30,
         eventSource: ""
       })
+
       $(window).on "swipeleft", (event) ->
         $('#calendar').fullCalendar('next')
       $(window).on "swiperight", (event) ->
         $('#calendar').fullCalendar('prev')
+
+      $(".today").bind "touchstart", ->
+        $('.today').addClass('active')
+      $(".today").bind "touchend", ->
+        $('.today').removeClass('active')
+
+      $(".new-event").bind "touchstart", ->
+        $('.new-event').addClass('active')
+      $(".new-event").bind "touchend", ->
+        $('.new-event').removeClass('active')
+
+      $(".next").bind "touchstart", ->
+        $('.next').addClass('active')
+      $(".next").bind "touchend", ->
+        $('.next').removeClass('active')
+
+      $(".previous").bind "touchstart", ->
+        $('.previous').addClass('active')
+      $(".previous").bind "touchend", ->
+        $('.previous').removeClass('active')
+
+      $(".month").bind "touchstart", ->
+        $('.month').addClass('active')
+      $(".month").bind "touchend", ->
+        $('.month').removeClass('active')
+
+      $(".week").bind "touchstart", ->
+        $('.week').addClass('active')
+      $(".week").bind "touchend", ->
+        $('.week').removeClass('active')
+
+      $(".day").bind "touchstart", ->
+        $('.day').addClass('active')
+      $(".day").bind "touchend", ->
+        $('.day').removeClass('active')
+
+      $(".icon").bind "touchstart", ->
+        $('.icon').addClass('active')
+      $(".icon").bind "touchend", ->
+        $('.icon').removeClass('active')
 
     changeToMonthView: () ->
       $('#calendar').fullCalendar( 'changeView', 'month' )
