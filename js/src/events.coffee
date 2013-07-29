@@ -113,10 +113,12 @@ $ ->
 
     addNewEvent: () ->
       $('#modal').show()
+      $('#cal-footer').hide()
 
     cancel: (e) ->
       e.preventDefault()
       $('#modal').hide()
+      $('#cal-footer').show()
 
     changeToMonthView: () ->
       $('#calendar').fullCalendar( 'changeView', 'month' )

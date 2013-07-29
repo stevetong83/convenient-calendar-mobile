@@ -159,12 +159,14 @@
       };
 
       EventsView.prototype.addNewEvent = function() {
-        return $('#modal').show();
+        $('#modal').show();
+        return $('#cal-footer').hide();
       };
 
       EventsView.prototype.cancel = function(e) {
         e.preventDefault();
-        return $('#modal').hide();
+        $('#modal').hide();
+        return $('#cal-footer').show();
       };
 
       EventsView.prototype.changeToMonthView = function() {
