@@ -65,40 +65,10 @@ $ ->
       $(window).on "swiperight", (event) ->
         $('#calendar').fullCalendar('prev')
 
-      $(".today").bind "touchstart", ->
-        $('.today').addClass('active')
-      $(".today").bind "touchend", ->
-        $('.today').removeClass('active')
-
-      $(".new-event").bind "touchstart", ->
-        $('.new-event').addClass('active')
-      $(".new-event").bind "touchend", ->
-        $('.new-event').removeClass('active')
-
-      $(".next").bind "touchstart", ->
-        $('.next').addClass('active')
-      $(".next").bind "touchend", ->
-        $('.next').removeClass('active')
-
-      $(".previous").bind "touchstart", ->
-        $('.previous').addClass('active')
-      $(".previous").bind "touchend", ->
-        $('.previous').removeClass('active')
-
-      $(".month").bind "touchstart", ->
-        $('.month').addClass('active')
-      $(".month").bind "touchend", ->
-        $('.month').removeClass('active')
-
-      $(".week").bind "touchstart", ->
-        $('.week').addClass('active')
-      $(".week").bind "touchend", ->
-        $('.week').removeClass('active')
-
-      $(".day").bind "touchstart", ->
-        $('.day').addClass('active')
-      $(".day").bind "touchend", ->
-        $('.day').removeClass('active')
+      $(".today, .new-event, .previous, .next, .month, .week, .day").bind "touchstart", ->
+        $(this).addClass('active')
+      $(".today, .new-event, .previous, .next, .month, .week, .day").bind "touchend", ->
+        $(this).removeClass('active')
 
       $(".icon").bind "touchstart", ->
         $('.icon').addClass('active')

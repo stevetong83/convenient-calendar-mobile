@@ -41,13 +41,19 @@
 
       ContactsView.prototype.initialize = function() {
         this.template = "<div id=\"contacts\">Contacts</div>";
-        return this.render();
+        this.render();
+        $(".icon").bind("touchstart", function() {
+          return $('.icon').addClass('active');
+        });
+        return $(".icon").bind("touchend", function() {
+          return $('.icon').removeClass('active');
+        });
       };
 
       ContactsView.prototype.render = function() {
         $(this.el).html(this.template);
         $('#menu').html('Contacts');
-        return $('#back').html('Menu');
+        return $('#back').html("<button class='icon'>Menu</button");
       };
 
       return ContactsView;
@@ -125,47 +131,11 @@
         $(window).on("swiperight", function(event) {
           return $('#calendar').fullCalendar('prev');
         });
-        $(".today").bind("touchstart", function() {
-          return $('.today').addClass('active');
+        $(".today, .new-event, .previous, .next, .month, .week, .day").bind("touchstart", function() {
+          return $(this).addClass('active');
         });
-        $(".today").bind("touchend", function() {
-          return $('.today').removeClass('active');
-        });
-        $(".new-event").bind("touchstart", function() {
-          return $('.new-event').addClass('active');
-        });
-        $(".new-event").bind("touchend", function() {
-          return $('.new-event').removeClass('active');
-        });
-        $(".next").bind("touchstart", function() {
-          return $('.next').addClass('active');
-        });
-        $(".next").bind("touchend", function() {
-          return $('.next').removeClass('active');
-        });
-        $(".previous").bind("touchstart", function() {
-          return $('.previous').addClass('active');
-        });
-        $(".previous").bind("touchend", function() {
-          return $('.previous').removeClass('active');
-        });
-        $(".month").bind("touchstart", function() {
-          return $('.month').addClass('active');
-        });
-        $(".month").bind("touchend", function() {
-          return $('.month').removeClass('active');
-        });
-        $(".week").bind("touchstart", function() {
-          return $('.week').addClass('active');
-        });
-        $(".week").bind("touchend", function() {
-          return $('.week').removeClass('active');
-        });
-        $(".day").bind("touchstart", function() {
-          return $('.day').addClass('active');
-        });
-        $(".day").bind("touchend", function() {
-          return $('.day').removeClass('active');
+        $(".today, .new-event, .previous, .next, .month, .week, .day").bind("touchend", function() {
+          return $(this).removeClass('active');
         });
         $(".icon").bind("touchstart", function() {
           return $('.icon').addClass('active');
@@ -218,23 +188,29 @@
       MenuView.prototype.el = '#page';
 
       MenuView.prototype.initialize = function() {
-        this.template = "<ul id=\"nav\">\n  <li id=\"events\">Calendar</li>\n  <li id=\"contacts\"><div >Contacts</div></li>\n  <li id=\"photos\">Photos</li>\n</ul>";
+        this.template = "<ul id=\"nav\">\n  <li id=\"events\"><img src=\"\" />Calendar</li>\n  <li id=\"contacts\"><img src=\"\" />Contacts</li>\n  <li id=\"photos\"><img src=\"\" />Photos</li>\n</ul>";
         return this.render();
       };
 
       MenuView.prototype.events = function() {
         return {
-          "click #events": "loadEvents",
-          "click #contacts": "loadContacts",
-          "click #photos": "loadPhotos",
-          'click #back': 'goToMenu'
+          "tap #events": "loadEvents",
+          "tap #contacts": "loadContacts",
+          "tap #photos": "loadPhotos",
+          'tap #back': 'goToMenu'
         };
       };
 
       MenuView.prototype.render = function() {
         $('#container').html(this.template);
-        $('#menu').html('');
-        return $.mobile.loadingMessage = false;
+        $('#menu').html('Menu');
+        $('#back').html('');
+        $("#nav li").bind("touchstart", function() {
+          return $(this).addClass('active');
+        });
+        return $("#nav li").bind("touchend", function() {
+          return $(this).removeClass('active');
+        });
       };
 
       MenuView.prototype.loadEvents = function() {
@@ -303,13 +279,19 @@
 
       PhotosView.prototype.initialize = function() {
         this.template = "<div id=\"photos\">Photos</div>";
-        return this.render();
+        this.render();
+        $(".icon").bind("touchstart", function() {
+          return $('.icon').addClass('active');
+        });
+        return $(".icon").bind("touchend", function() {
+          return $('.icon').removeClass('active');
+        });
       };
 
       PhotosView.prototype.render = function() {
         $(this.el).html(this.template);
         $('#menu').html('Photos');
-        return $('#back').html('Menu');
+        return $('#back').html("<button class='icon'>Menu</button");
       };
 
       return PhotosView;
@@ -342,8 +324,14 @@
       SessionView.prototype.el = $('#container');
 
       SessionView.prototype.initialize = function() {
-        this.template = "<p><input type=\"text\" name=\"email\" placeholder=\"Email\" /></p>\n<p><input type=\"text\" name=\"password\" placeholder=\"Password\" /></p>\n<p><button id=\"login\">Sign In</button></p>";
-        return this.render();
+        this.template = "<p><input type=\"text\" name=\"email\" placeholder=\"Email\" /></p>\n<p><input type=\"text\" name=\"password\" placeholder=\"Password\" /></p>\n<p><button id=\"login\" class=\"cal-button wide-button\">Sign In</button></p>";
+        this.render();
+        $("#login").bind("touchstart", function() {
+          return $('#login').addClass('active');
+        });
+        return $("#login").bind("touchend", function() {
+          return $('#login').removeClass('active');
+        });
       };
 
       SessionView.prototype.events = function() {

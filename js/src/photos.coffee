@@ -18,8 +18,12 @@ $ ->
         <div id="photos">Photos</div>
         """
       @render()
+      $(".icon").bind "touchstart", ->
+          $('.icon').addClass('active')
+      $(".icon").bind "touchend", ->
+        $('.icon').removeClass('active')
 
     render: =>
       $(@el).html(@template)
       $('#menu').html('Photos')
-      $('#back').html('Menu')
+      $('#back').html("<button class='icon'>Menu</button")

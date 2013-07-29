@@ -16,7 +16,7 @@ html, body {
 input {
   display: block;
   width: 100%;
-  padding: 5%;
+  padding: 4%;
   font-size: 1.8em;
   border-radius: 6px;
   margin-bottom: 20px;  
@@ -53,8 +53,6 @@ ul {
   font-size: 2.5em;
 }
 
-
-
 #header #back {
   line-height: 130px;
   float: right;
@@ -63,6 +61,7 @@ ul {
 
 #nav li {
   color: #fff;
+  font-size: 3.0em;
   font-weight: bold;
   background: #1f448a;
   cursor: pointer;
@@ -70,7 +69,16 @@ ul {
   width: 100%;
   list-style-type: none;
   margin: 10px 0;
+  border-radius: 10px;
+  clear: both;
+
 }
+
+#nav img {
+  margin: 0 5%;
+}
+
+
 
 #cal-footer {
   position: fixed;
@@ -168,6 +176,10 @@ ul {
   color: #fff !important;
 }
 
+.wide-button {
+  width: 100%;
+}
+
 .icon {
   padding: 20px;
   border: 1px solid #000;
@@ -179,6 +191,10 @@ ul {
 
 #back .active {
   background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#1f448a), to(#2F2727));
+}
+
+#nav .active {
+  background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#2F2727), to(#1f448a));
 }
 
 

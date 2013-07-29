@@ -5,23 +5,30 @@ $ ->
       initialize: ->
         @template = """
           <ul id="nav">
-            <li id="events">Calendar</li>
-            <li id="contacts"><div >Contacts</div></li>
-            <li id="photos">Photos</li>
+            <li id="events"><img src="" />Calendar</li>
+            <li id="contacts"><img src="" />Contacts</li>
+            <li id="photos"><img src="" />Photos</li>
           </ul>
           """
         @render()
 
+
       events: ->
-        "click #events"   : "loadEvents"
-        "click #contacts" : "loadContacts"
-        "click #photos"   : "loadPhotos"
-        'click #back' : 'goToMenu'
+        "tap #events"   : "loadEvents"
+        "tap #contacts" : "loadContacts"
+        "tap #photos"   : "loadPhotos"
+        'tap #back' : 'goToMenu'
 
       render: =>
         $('#container').html(@template)
-        $('#menu').html('')
-        $.mobile.loadingMessage = false
+        $('#menu').html('Menu')
+        $('#back').html('')
+
+        $("#nav li").bind "touchstart", ->
+          $(this).addClass('active')
+        $("#nav li").bind "touchend", ->
+          $(this).removeClass('active')
+
 
       loadEvents: () ->
         App.navigate('/events', trigger: true)
