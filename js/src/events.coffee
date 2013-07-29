@@ -13,6 +13,24 @@ $ ->
 
     initialize: ->
       @template =  """
+        <div id="modal">
+          <div id="modal-header">
+            <div class="wrapper">
+              <div id="modal-menu">
+                New Event
+              </div>
+              <div id="modal-back">
+                <button class='icon'>Cancel</button>
+              </div>
+              <div id="form">
+                <input placeholder="Event"/>
+                <input placeholder="Location"/>
+                All Day: <input type="checkbox" />
+                <button class='cal-button wide-button'>Add Event</button>
+              </div>
+            </div>
+          </div>
+        </div>
         <div id="cal-header">
           <div id="today">
             <button class="cal-button today">Today</button>
@@ -39,12 +57,15 @@ $ ->
       @render()
 
     events: ->
-      'tap .month'      :   'changeToMonthView'
-      'tap .week'       :   'changeToWeekView'
-      'tap .day'        :   'changeToDayView'
-      'tap .today'      :   'today'
-      'tap .previous'   :   'previous'
-      'tap .next'       :   'next'
+      'tap .new-event'          :   'addNewEvent'
+      'tap #modal-back .icon'   :   'cancel'
+      'tap .month'              :   'changeToMonthView'
+      'tap .week'               :   'changeToWeekView'
+      'tap .day'                :   'changeToDayView'
+      'tap .today'              :   'today'
+      'tap .previous'           :   'previous'
+      'tap .next'               :   'next'
+      
 
     render: =>
       $('#container').html(@template)
@@ -53,7 +74,6 @@ $ ->
         viewDisplay: (view) ->
           $('#menu').html(view.title)
         header: false,
-
         aspectRatio: 1,
         defaultView: 'month',
         slotMinutes: 30,
@@ -81,6 +101,12 @@ $ ->
         $('.icon').addClass('active')
       $(".icon").bind "touchend", ->
         $('.icon').removeClass('active')
+
+    addNewEvent: () ->
+      $('#modal').show()
+
+    cancel: () ->
+      $('#modal').hide()
 
     changeToMonthView: () ->
       $('#calendar').fullCalendar( 'changeView', 'month' )

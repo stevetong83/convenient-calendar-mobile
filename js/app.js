@@ -97,12 +97,14 @@
       EventsView.prototype.el = $('#page');
 
       EventsView.prototype.initialize = function() {
-        this.template = "<div id=\"cal-header\">\n  <div id=\"today\">\n    <button class=\"cal-button today\">Today</button>\n  </div>\n  <div id=\"new-event\">\n    <button class=\"new-event cal-button\">+</button>\n  </div>\n</div>\n<div id=\"calendar\"></div>\n<div id=\"cal-footer\">\n  <div id=\"previous\">\n    <button class=\"previous cal-button\"><</button>\n  </div>\n  <div id=\"center\">\n    <button class=\"month cal-button\">Month</button>\n    <button class=\"week cal-button\">Week</button>\n    <button class=\"day cal-button\">Day</button>\n  </div>\n  <div id=\"next\">\n    <button class=\"next cal-button\">></button>\n  </div>\n</div>";
+        this.template = "<div id=\"modal\">\n  <div id=\"modal-header\">\n    <div class=\"wrapper\">\n      <div id=\"modal-menu\">\n        New Event\n      </div>\n      <div id=\"modal-back\">\n        <button class='icon'>Cancel</button>\n      </div>\n      <div id=\"form\">\n        <input placeholder=\"Event\"/>\n        <input placeholder=\"Location\"/>\n        All Day: <input type=\"checkbox\" />\n        <button class='cal-button wide-button'>Add Event</button>\n      </div>\n    </div>\n  </div>\n</div>\n<div id=\"cal-header\">\n  <div id=\"today\">\n    <button class=\"cal-button today\">Today</button>\n  </div>\n  <div id=\"new-event\">\n    <button class=\"new-event cal-button\">+</button>\n  </div>\n</div>\n<div id=\"calendar\"></div>\n<div id=\"cal-footer\">\n  <div id=\"previous\">\n    <button class=\"previous cal-button\"><</button>\n  </div>\n  <div id=\"center\">\n    <button class=\"month cal-button\">Month</button>\n    <button class=\"week cal-button\">Week</button>\n    <button class=\"day cal-button\">Day</button>\n  </div>\n  <div id=\"next\">\n    <button class=\"next cal-button\">></button>\n  </div>\n</div>";
         return this.render();
       };
 
       EventsView.prototype.events = function() {
         return {
+          'tap .new-event': 'addNewEvent',
+          'tap #modal-back .icon': 'cancel',
           'tap .month': 'changeToMonthView',
           'tap .week': 'changeToWeekView',
           'tap .day': 'changeToDayView',
@@ -153,6 +155,14 @@
         return $(".icon").bind("touchend", function() {
           return $('.icon').removeClass('active');
         });
+      };
+
+      EventsView.prototype.addNewEvent = function() {
+        return $('#modal').show();
+      };
+
+      EventsView.prototype.cancel = function() {
+        return $('#modal').hide();
       };
 
       EventsView.prototype.changeToMonthView = function() {
