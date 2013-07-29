@@ -123,7 +123,17 @@
           aspectRatio: 1,
           defaultView: 'month',
           slotMinutes: 30,
-          eventSource: ""
+          eventSource: "",
+          loading: function(bool) {
+            if (bool) {
+              return $('#loading').show();
+            } else {
+              return $('#loading').hide();
+            }
+          },
+          dayClick: function(date, allDay, jsEvent, view) {
+            return alert(date);
+          }
         });
         $(window).on("swipeleft", function(event) {
           return $('#calendar').fullCalendar('next');

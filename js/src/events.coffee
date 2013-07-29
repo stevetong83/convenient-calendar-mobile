@@ -57,7 +57,14 @@ $ ->
         aspectRatio: 1,
         defaultView: 'month',
         slotMinutes: 30,
-        eventSource: ""
+        eventSource: "",
+        loading: (bool) ->
+          if (bool) 
+            $('#loading').show()
+          else 
+            $('#loading').hide()
+        dayClick: (date, allDay, jsEvent, view) ->
+          alert date
       })
 
       $(window).on "swipeleft", (event) ->
