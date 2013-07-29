@@ -23,10 +23,15 @@ $ ->
                 <button class='icon'>Cancel</button>
               </div>
               <div id="form">
-                <input placeholder="Event"/>
-                <input placeholder="Location"/>
-                All Day: <input type="checkbox" />
-                <button class='cal-button wide-button'>Add Event</button>
+                <form>
+                  <input type="text" name="event" placeholder="Event" />
+                  <input type="text" name="location" placeholder="Location"/>
+                  <input type="date" id="start-date" placeholder="Start Date" />
+                  <input type="time" id="start-time" placeholder="Start Time" pattern="^([0-1]?[0-9]|2[0-4]):([0-5][0-9])(:[0-5][0-9])?$" />
+                  All Day: <input type="checkbox" />
+                  <textarea name="description" placeholder="Description" rows="5"/>
+                  <button class='cal-button wide-button'>Add Event</button>
+                </form>
               </div>
             </div>
           </div>
@@ -58,13 +63,14 @@ $ ->
 
     events: ->
       'tap .new-event'          :   'addNewEvent'
-      'tap #modal-back .icon'   :   'cancel'
+      'tap #modal-back > .icon'               :   'cancel'
       'tap .month'              :   'changeToMonthView'
       'tap .week'               :   'changeToWeekView'
       'tap .day'                :   'changeToDayView'
       'tap .today'              :   'today'
       'tap .previous'           :   'previous'
       'tap .next'               :   'next'
+      'tap #start_date'         :    'openStartDate'
       
 
     render: =>
@@ -102,10 +108,14 @@ $ ->
       $(".icon").bind "touchend", ->
         $('.icon').removeClass('active')
 
+    
+
+
     addNewEvent: () ->
       $('#modal').show()
 
-    cancel: () ->
+    cancel: (e) ->
+      e.preventDefault()
       $('#modal').hide()
 
     changeToMonthView: () ->
@@ -126,5 +136,9 @@ $ ->
     next: () ->
       $('#calendar').fullCalendar('next')
 
+    openStartDate: () ->
+
+
+      
       
 

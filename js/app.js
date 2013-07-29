@@ -97,20 +97,21 @@
       EventsView.prototype.el = $('#page');
 
       EventsView.prototype.initialize = function() {
-        this.template = "<div id=\"modal\">\n  <div id=\"modal-header\">\n    <div class=\"wrapper\">\n      <div id=\"modal-menu\">\n        New Event\n      </div>\n      <div id=\"modal-back\">\n        <button class='icon'>Cancel</button>\n      </div>\n      <div id=\"form\">\n        <input placeholder=\"Event\"/>\n        <input placeholder=\"Location\"/>\n        All Day: <input type=\"checkbox\" />\n        <button class='cal-button wide-button'>Add Event</button>\n      </div>\n    </div>\n  </div>\n</div>\n<div id=\"cal-header\">\n  <div id=\"today\">\n    <button class=\"cal-button today\">Today</button>\n  </div>\n  <div id=\"new-event\">\n    <button class=\"new-event cal-button\">+</button>\n  </div>\n</div>\n<div id=\"calendar\"></div>\n<div id=\"cal-footer\">\n  <div id=\"previous\">\n    <button class=\"previous cal-button\"><</button>\n  </div>\n  <div id=\"center\">\n    <button class=\"month cal-button\">Month</button>\n    <button class=\"week cal-button\">Week</button>\n    <button class=\"day cal-button\">Day</button>\n  </div>\n  <div id=\"next\">\n    <button class=\"next cal-button\">></button>\n  </div>\n</div>";
+        this.template = "<div id=\"modal\">\n  <div id=\"modal-header\">\n    <div class=\"wrapper\">\n      <div id=\"modal-menu\">\n        New Event\n      </div>\n      <div id=\"modal-back\">\n        <button class='icon'>Cancel</button>\n      </div>\n      <div id=\"form\">\n        <form>\n          <input type=\"text\" name=\"event\" placeholder=\"Event\" />\n          <input type=\"text\" name=\"location\" placeholder=\"Location\"/>\n          <input type=\"date\" id=\"start-date\" placeholder=\"Start Date\" />\n          <input type=\"time\" id=\"start-time\" placeholder=\"Start Time\" pattern=\"^([0-1]?[0-9]|2[0-4]):([0-5][0-9])(:[0-5][0-9])?$\" />\n          All Day: <input type=\"checkbox\" />\n          <textarea name=\"description\" placeholder=\"Description\" rows=\"5\"/>\n          <button class='cal-button wide-button'>Add Event</button>\n        </form>\n      </div>\n    </div>\n  </div>\n</div>\n<div id=\"cal-header\">\n  <div id=\"today\">\n    <button class=\"cal-button today\">Today</button>\n  </div>\n  <div id=\"new-event\">\n    <button class=\"new-event cal-button\">+</button>\n  </div>\n</div>\n<div id=\"calendar\"></div>\n<div id=\"cal-footer\">\n  <div id=\"previous\">\n    <button class=\"previous cal-button\"><</button>\n  </div>\n  <div id=\"center\">\n    <button class=\"month cal-button\">Month</button>\n    <button class=\"week cal-button\">Week</button>\n    <button class=\"day cal-button\">Day</button>\n  </div>\n  <div id=\"next\">\n    <button class=\"next cal-button\">></button>\n  </div>\n</div>";
         return this.render();
       };
 
       EventsView.prototype.events = function() {
         return {
           'tap .new-event': 'addNewEvent',
-          'tap #modal-back .icon': 'cancel',
+          'tap #modal-back > .icon': 'cancel',
           'tap .month': 'changeToMonthView',
           'tap .week': 'changeToWeekView',
           'tap .day': 'changeToDayView',
           'tap .today': 'today',
           'tap .previous': 'previous',
-          'tap .next': 'next'
+          'tap .next': 'next',
+          'tap #start_date': 'openStartDate'
         };
       };
 
@@ -161,7 +162,8 @@
         return $('#modal').show();
       };
 
-      EventsView.prototype.cancel = function() {
+      EventsView.prototype.cancel = function(e) {
+        e.preventDefault();
         return $('#modal').hide();
       };
 
@@ -189,6 +191,8 @@
         return $('#calendar').fullCalendar('next');
       };
 
+      EventsView.prototype.openStartDate = function() {};
+
       return EventsView;
 
     })(Backbone.View);
@@ -208,7 +212,7 @@
       MenuView.prototype.el = '#page';
 
       MenuView.prototype.initialize = function() {
-        this.template = "<ul id=\"nav\">\n  <li id=\"events\"><img src=\"\" />Calendar</li>\n  <li id=\"contacts\"><img src=\"\" />Contacts</li>\n  <li id=\"photos\"><img src=\"\" />Photos</li>\n</ul>";
+        this.template = "<ul id=\"nav\">\n  <li id=\"events\"><img src=\"images/calendar.png\" />Calendar</li>\n  <li id=\"contacts\"><img src=\"images/contacts.png\" />Contacts</li>\n  <li id=\"photos\"><img src=\"images/photos.png\" />Photos</li>\n</ul>";
         return this.render();
       };
 
@@ -217,7 +221,7 @@
           "tap #events": "loadEvents",
           "tap #contacts": "loadContacts",
           "tap #photos": "loadPhotos",
-          'tap #back': 'goToMenu'
+          'tap #back > .icon': 'goToMenu'
         };
       };
 

@@ -5,9 +5,9 @@ $ ->
       initialize: ->
         @template = """
           <ul id="nav">
-            <li id="events"><img src="" />Calendar</li>
-            <li id="contacts"><img src="" />Contacts</li>
-            <li id="photos"><img src="" />Photos</li>
+            <li id="events"><img src="images/calendar.png" />Calendar</li>
+            <li id="contacts"><img src="images/contacts.png" />Contacts</li>
+            <li id="photos"><img src="images/photos.png" />Photos</li>
           </ul>
           """
         @render()
@@ -17,7 +17,7 @@ $ ->
         "tap #events"   : "loadEvents"
         "tap #contacts" : "loadContacts"
         "tap #photos"   : "loadPhotos"
-        'tap #back' : 'goToMenu'
+        'tap #back > .icon' : 'goToMenu'
 
       render: =>
         $('#container').html(@template)
@@ -41,3 +41,5 @@ $ ->
 
       goToMenu: () ->
         App.navigate('/menu', trigger: true)
+
+      
