@@ -61,6 +61,22 @@ ul {
   z-index: 200;
 }
 
+#sessions {
+  width: 100%;
+}
+
+#sessions img {
+  display: block;
+  margin: 150px auto;
+}
+
+#sessions h1 {
+  font-size: 2.5em;
+  color: #1f448a;
+  margin-bottom: 130px;
+  text-align: center;
+}
+
 #modal {
   display: none;
   position: absolute;

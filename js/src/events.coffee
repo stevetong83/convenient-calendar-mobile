@@ -98,18 +98,15 @@ $ ->
       $(window).on "swiperight", (event) ->
         $('#calendar').fullCalendar('prev')
 
-      $(".today, .new-event, .previous, .next, .month, .week, .day").bind "touchstart", ->
+      $(".cal-button").bind "touchstart", ->
         $(this).addClass('active')
-      $(".today, .new-event, .previous, .next, .month, .week, .day").bind "touchend", ->
+      $(".cal-button").bind "touchend", ->
         $(this).removeClass('active')
 
       $(".icon").bind "touchstart", ->
         $('.icon').addClass('active')
       $(".icon").bind "touchend", ->
         $('.icon').removeClass('active')
-
-    
-
 
     addNewEvent: () ->
       $('#modal').show()

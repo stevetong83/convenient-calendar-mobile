@@ -144,10 +144,10 @@
         $(window).on("swiperight", function(event) {
           return $('#calendar').fullCalendar('prev');
         });
-        $(".today, .new-event, .previous, .next, .month, .week, .day").bind("touchstart", function() {
+        $(".cal-button").bind("touchstart", function() {
           return $(this).addClass('active');
         });
-        $(".today, .new-event, .previous, .next, .month, .week, .day").bind("touchend", function() {
+        $(".cal-button").bind("touchend", function() {
           return $(this).removeClass('active');
         });
         $(".icon").bind("touchstart", function() {
@@ -350,7 +350,7 @@
       SessionView.prototype.el = $('#container');
 
       SessionView.prototype.initialize = function() {
-        this.template = "<p><input type=\"text\" name=\"email\" placeholder=\"Email\" /></p>\n<p><input type=\"text\" name=\"password\" placeholder=\"Password\" /></p>\n<p><button id=\"login\" class=\"cal-button wide-button\">Sign In</button></p>";
+        this.template = "<div id=\"sessions\">\n<img src=\"images/logo.jpg\"/>\n<h1>Welcome to Convenient Calendar</h1>\n<p><input type=\"text\" name=\"email\" placeholder=\"Email\" /></p>\n<p><input type=\"text\" name=\"password\" placeholder=\"Password\" /></p>\n<p><button id=\"login\" class=\"cal-button wide-button\">Sign In</button></p>\n</div>";
         this.render();
         $("#login").bind("touchstart", function() {
           return $('#login').addClass('active');
@@ -367,13 +367,15 @@
       };
 
       SessionView.prototype.render = function() {
-        return $(this.el).html(this.template);
+        $(this.el).html(this.template);
+        return $('#header').hide();
       };
 
       SessionView.prototype.loadMenu = function() {
-        return App.navigate('/menu', {
+        App.navigate('/menu', {
           trigger: true
         });
+        return $('#header').show();
       };
 
       return SessionView;
