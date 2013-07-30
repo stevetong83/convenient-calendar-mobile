@@ -53,7 +53,7 @@
     -->
 
     <!-- Define app icon for each platform. -->
-    <icon src="images/logo.png" />
+    <icon src="images/convenient-calendar-logo-icon.png" />
 <!--     <icon src="images/logo.png"   gap:platform="android"    gap:density="ldpi" />
     <icon src="images/logo.png"   gap:platform="android"    gap:density="mdpi" />
     <icon src="images/logo.png"   gap:platform="android"    gap:density="hdpi" />
